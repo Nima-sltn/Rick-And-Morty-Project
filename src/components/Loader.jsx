@@ -14,7 +14,6 @@ const Loader = () => {
       }}
       wrapperClass="loader"
       visible={true}
-      ariaLabel="oval-loading"
       strokeWidth={3}
     />
   );
