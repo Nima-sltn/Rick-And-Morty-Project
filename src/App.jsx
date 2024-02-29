@@ -1,36 +1,72 @@
 import "./App.css";
-import { allCharacters } from "../data/data";
-import Navbar from "./components/Navbar";
+import Navbar, { Search, SearchResult } from "./components/Navbar";
 import CharacterList from "./components/characterList";
 import CharacterDetail from "./components/CharacterDetail";
 import { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
 
 function App() {
   const [characters, setCharacters] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     async function fetchData() {
-      setIsLoading(true);
-      const res = await fetch("https://rickandmortyapi.com/api/character");
-      const data = await res.json();
-      setCharacters(data.results.slice(0, 5));
-      setIsLoading(false);
+      try {
+        setIsLoading(true);
+        const { data } = await axios.get(
+          `https://rickandmortyapi.com/api/character?name=${query}`
+        );
+        setCharacters(data.results.slice(0, 5));
+      } catch (err) {
+        setCharacters([]);
+        toast.error(err.response.data.error);
+      } finally {
+        setIsLoading(false);
+      }
     }
     fetchData();
-  }, []);
+  }, [query]);
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       setIsLoading(true);
+  //       const res = await fetch("https://rickandmortyapi.com/api/characterss");
+
+  //       if (!res.ok) throw new Error("something went wrong");
+
+  //       const data = await res.json();
+  //       setCharacters(data.results.slice(0, 5));
+  //     } catch (err) {
+  //       toast.error(err.message);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
 
   return (
     <>
       <div className="app">
-        <Navbar numOfResult={characters.length} />
-        <div className="main">
+        <Toaster />
+        <Navbar>
+          <Search query={query} setQuery={setQuery} />
+          <SearchResult numOfResult={characters.length} />
+        </Navbar>
+        <Main>
           <CharacterList characters={characters} isLoading={isLoading} />
           <CharacterDetail />
-        </div>
+        </Main>
       </div>
     </>
   );
 }
 
 export default App;
+
+function Main({ children }) {
+  return <div className="main">{children}</div>;
+}
