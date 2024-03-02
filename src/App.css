@@ -2,7 +2,7 @@
   margin: 0 auto;
   max-width: 1280px;
   position: relative;
-  padding: 2rem;
+  padding: 2rem 1.5rem;
 }
 
 .navbar {
@@ -13,15 +13,18 @@
   padding: 1rem;
   border-radius: 1rem;
   margin-bottom: 1rem;
+  gap: 15px;
 }
 
 .navbar__logo {
+  white-space: nowrap;
   color: var(--slate-300);
   font-weight: 700;
 }
 
 .navbar__result {
   color: var(--slate-400);
+  display: none;
 }
 
 .navbar .heart {
@@ -29,8 +32,8 @@
   color: var(--rose-500);
 }
 .navbar .heart .icon {
-  width: 2rem;
-  height: 2rem;
+  width: 1.8rem;
+  height: 1.8rem;
 }
 .navbar .heart .badge {
   font-size: 0.9rem;
@@ -47,15 +50,32 @@
   padding: 1px 4px;
 }
 
+@media (min-width: 768px) {
+  .navbar__result {
+    display: block;
+  }
+  .navbar .heart .icon {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
 .main {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   width: 100%;
   gap: 2rem;
 }
 
+@media (min-width: 768px) {
+  .main {
+    flex-direction: row;
+  }
+}
+
 .characters-list {
-  width: 40%;
+  width: 100%;
 }
 
 .box h2 {
@@ -104,6 +124,12 @@
   grid-column: 3/4;
   grid-row: 1/3;
   align-self: center;
+}
+
+@media (min-width: 768px) {
+  .characters-list {
+    width: 45%;
+  }
 }
 
 .icon.red {
@@ -177,6 +203,12 @@
   color: var(--slate-400);
 }
 
+@media (min-width: 768px) {
+  .character-detail__container {
+    display: block;
+  }
+}
+
 /* character episodes */
 
 .character-episodes {
@@ -223,5 +255,15 @@
   }
   .character-detail__info .actions {
     flex-direction: row;
+  }
+}
+
+.loader {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .loader {
+    width: 45%;
   }
 }
