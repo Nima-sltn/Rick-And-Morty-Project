@@ -1,7 +1,48 @@
 import { ArrowUpCircleIcon } from "@heroicons/react/24/outline";
-import { character, episodes } from "../../data/data";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import Loader from "./Loader";
+import toast from "react-hot-toast";
 
-function CharacterDetail() {
+function CharacterDetail({ selectedId }) {
+  const [character, setCharacter] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [episodes, setEpisodes] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setIsLoading(true);
+        const { data } = await axios.get(
+          `https://rickandmortyapi.com/api/character/${selectedId}`
+        );
+        setCharacter(data);
+
+        const episodesId = data.episode.map((e) => e.split("/").at(-1));
+        const { data: episodeData } = await axios.get(
+          `https://rickandmortyapi.com/api/episode/${episodesId}`
+        );
+        setEpisodes([episodeData].flat().slice(0, 5));
+      } catch (err) {
+        toast.error(err.response.data.error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    if (selectedId) fetchData();
+  }, [selectedId]);
+
+  if (isLoading) return <Loader />;
+
+  if (!selectedId || !character)
+    return (
+      <div
+        className="character-detail__container"
+        style={{ flex: 1, color: "var(--slate-300)" }}>
+        Please select a character.
+      </div>
+    );
+
   return (
     <>
       <div style={{ flex: 1 }}>
@@ -26,7 +67,7 @@ function CharacterDetail() {
             </div>
             <div className="location">
               <p>Last known location:</p>
-              <p>{character.location.name}</p>
+              {/* <p>{character.location.name}</p> */}
             </div>
             <div className="actions">
               <button className="btn btn--primary">Add to Favorite</button>
