@@ -6,27 +6,13 @@ import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 
 import useCharacters from "./hooks/useCharacters";
+import useLocalStorage from "./hooks/useLocalStorage";
 
 function App() {
   const [query, setQuery] = useState("");
   const { isLoading, characters } = useCharacters(query);
   const [selectedId, setSelectedId] = useState(null);
-  const [favorite, setFavorite] = useState(
-    () => JSON.parse(localStorage.getItem("FAVORITES")) || []
-  );
-
-  const handleSelectCharacter = (id) => {
-    setSelectedId((prevId) => (prevId === id ? null : id));
-  };
-  const handleAddFavorite = (char) => {
-    setFavorite((preFav) => [...preFav, char]);
-  };
-  const handleDeleteFavorite = (id) => {
-    setFavorite((preFav) => preFav.filter((fav) => fav.id !== id));
-  };
-
-  const isAddToFavorite = favorite.map((fav) => fav.id).includes(selectedId);
-
+  const [favorite, setFavorite] = useLocalStorage("FAVORITES", []);
   // useEffect(() => {
   //   async function fetchData() {
   //     try {
@@ -46,9 +32,18 @@ function App() {
   //   fetchData();
   // }, []);
 
-  useEffect(() => {
-    localStorage.setItem("FAVORITES", JSON.stringify(favorite));
-  }, [favorite]);
+  const handleSelectCharacter = (id) => {
+    setSelectedId((prevId) => (prevId === id ? null : id));
+  };
+  const handleAddFavorite = (char) => {
+    setFavorite((preFav) => [...preFav, char]);
+  };
+  const handleDeleteFavorite = (id) => {
+    setFavorite((preFav) => preFav.filter((fav) => fav.id !== id));
+  };
+
+  const isAddToFavorite = favorite.map((fav) => fav.id).includes(selectedId);
+
   return (
     <>
       <div className="app">
