@@ -1,8 +1,16 @@
-# React + Vite
+<h1 align="center" id="title">Rick And Morty App</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p>An application that shows information about characters and episodes of "Rick And Morty" series.</p>
 
-Currently, two official plugins are available:
+<h2>Features</h2>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Here're some of the project's best features:
+
+*   Advanced state management and props drilling
+*   Advanced custom hooks
+*   Search on characters based on query-string(searchParams)
+*   Add characters to favorites list
+*   Saving favorites list in localStorage
+*   Responsive for mobile, tablet and laptop
+
+View project online: [rick-and-morty-sn.netlify.app](https://rick-and-morty-sn.netlify.app/)
