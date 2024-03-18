@@ -1,11 +1,16 @@
-import { ArrowUpCircleIcon } from "@heroicons/react/24/outline";
+import { ArrowUpCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Loader from "./Loader";
 import toast from "react-hot-toast";
 
-function CharacterDetail({ selectedId, onAddFavorite, isAddToFavorite }) {
-  const [character, setCharacter] = useState([]);
+function CharacterDetail({
+  selectedId,
+  onAddFavorite,
+  isAddToFavorite,
+  onCloseSelectedCharacter,
+}) {
+  const [character, setCharacter] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [episodes, setEpisodes] = useState([]);
 
@@ -50,6 +55,7 @@ function CharacterDetail({ selectedId, onAddFavorite, isAddToFavorite }) {
           character={character}
           onAddFavorite={onAddFavorite}
           isAddToFavorite={isAddToFavorite}
+          onCloseSelectedCharacter={onCloseSelectedCharacter}
         />
         <EpisodeList episodes={episodes} />
       </div>
@@ -59,7 +65,13 @@ function CharacterDetail({ selectedId, onAddFavorite, isAddToFavorite }) {
 
 export default CharacterDetail;
 
-function CharacterSubInfo({ character, onAddFavorite, isAddToFavorite }) {
+function CharacterSubInfo({
+  character,
+  onAddFavorite,
+  isAddToFavorite,
+  onCloseSelectedCharacter,
+}) {
+  console.log(character);
   return (
     <>
       <div className="character-detail">
@@ -68,10 +80,25 @@ function CharacterSubInfo({ character, onAddFavorite, isAddToFavorite }) {
           alt={character.name}
           className="character-detail__img"
         />
-        <div className="character-detail__info">
-          <h3 className="name">
-            <span>{character.gender === "Male" ? "👨🏻‍🦱" : "👩🏻‍🦱"}</span>
-            <span>&nbsp;{character.name}</span>
+        <div className="character-detail__info" style={{ width: "100%" }}>
+          <h3
+            className="name"
+            style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}>
+            <div>
+              <span>{character.gender === "Male" ? "👨🏻‍🦱" : "👩🏻‍🦱"}</span>
+              <span>&nbsp;{character.name}</span>
+            </div>
+            <button onClick={onCloseSelectedCharacter}>
+              <XCircleIcon
+                className="icon close"
+                style={{ color: "var(--rose-500)" }}
+              />
+            </button>
           </h3>
           <div className="info">
             <span
@@ -83,7 +110,7 @@ function CharacterSubInfo({ character, onAddFavorite, isAddToFavorite }) {
           </div>
           <div className="location">
             <p>Last known location:</p>
-            {/* <p>{character.location}</p> */}
+            <p>{character.location.name}</p>
           </div>
           <div className="actions">
             {isAddToFavorite ? (

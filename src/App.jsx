@@ -2,7 +2,7 @@ import "./App.css";
 import Navbar, { Favorites, Search, SearchResult } from "./components/Navbar";
 import CharacterList from "./components/characterList";
 import CharacterDetail from "./components/CharacterDetail";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Toaster } from "react-hot-toast";
 
 import useCharacters from "./hooks/useCharacters";
@@ -67,6 +67,7 @@ function App() {
             selectedId={selectedId}
             onAddFavorite={handleAddFavorite}
             isAddToFavorite={isAddToFavorite}
+            onCloseSelectedCharacter={() => setSelectedId(null)}
           />
         </Main>
       </div>

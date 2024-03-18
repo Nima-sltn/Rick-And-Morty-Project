@@ -40,13 +40,26 @@ export function Favorites({ favorite, onDeleteFavorite }) {
   return (
     <>
       <Modal onOpen={setIsOpen} open={isOpen} title="List of Favorites">
-        {favorite.map((item) => (
-          <Character key={item.id} item={item}>
-            <button className="icon red">
-              <TrashIcon onClick={() => onDeleteFavorite(item.id)} />
-            </button>
-          </Character>
-        ))}
+        {favorite.length === 0 ? (
+          <p
+            style={{
+              width: "100%",
+              textAlign: "center",
+              color: "white",
+            }}>
+            Favorites List is Empty 😪
+          </p>
+        ) : (
+          favorite.map((item) => (
+            <Character key={item.id} item={item}>
+              <button
+                className="icon red"
+                onClick={() => onDeleteFavorite(item.id)}>
+                <TrashIcon />
+              </button>
+            </Character>
+          ))
+        )}
       </Modal>
       <button className="heart" onClick={() => setIsOpen(true)}>
         <HeartIcon className="icon" />
