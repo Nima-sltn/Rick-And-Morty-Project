@@ -1,4 +1,4 @@
-# Rick and Morty SPA Project 😍 ( React/TailwindCSS )
+# Rick and Morty SPA Project 😍
 
 ## [App Live](https://rick-and-morty-sn.netlify.app/)
 
