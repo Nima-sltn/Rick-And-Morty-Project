@@ -4,12 +4,10 @@ import Modal from "./Modal";
 import { Character } from "./characterList";
 function Navbar({ children }) {
   return (
-    <>
-      <nav className="navbar">
-        <Logo />
-        {children}
-      </nav>
-    </>
+    <nav className="navbar">
+      <Logo />
+      {children}
+    </nav>
   );
 }
 

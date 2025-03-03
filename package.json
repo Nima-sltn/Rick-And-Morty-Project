@@ -26,5 +26,12 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "vite": "^5.1.0"
+  },
+  "eslintConfig": {
+    "extends": ["plugin:react/recommended"],
+    "rules": {
+      "react/prop-types": "off"
+    }
   }
+
 }

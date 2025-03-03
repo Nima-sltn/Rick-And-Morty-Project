@@ -49,17 +49,15 @@ function CharacterDetail({
     );
 
   return (
-    <>
-      <div style={{ flex: 1 }}>
-        <CharacterSubInfo
-          character={character}
-          onAddFavorite={onAddFavorite}
-          isAddToFavorite={isAddToFavorite}
-          onCloseSelectedCharacter={onCloseSelectedCharacter}
-        />
-        <EpisodeList episodes={episodes} />
-      </div>
-    </>
+    <div style={{ flex: 1 }}>
+      <CharacterSubInfo
+        character={character}
+        onAddFavorite={onAddFavorite}
+        isAddToFavorite={isAddToFavorite}
+        onCloseSelectedCharacter={onCloseSelectedCharacter}
+      />
+      <EpisodeList episodes={episodes} />
+    </div>
   );
 }
 
@@ -73,59 +71,57 @@ function CharacterSubInfo({
 }) {
   console.log(character);
   return (
-    <>
-      <div className="character-detail">
-        <img
-          src={character.image}
-          alt={character.name}
-          className="character-detail__img"
-        />
-        <div className="character-detail__info" style={{ width: "100%" }}>
-          <h3
-            className="name"
-            style={{
-              width: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}>
-            <div>
-              <span>{character.gender === "Male" ? "👨🏻‍🦱" : "👩🏻‍🦱"}</span>
-              <span>&nbsp;{character.name}</span>
-            </div>
-            <button onClick={onCloseSelectedCharacter}>
-              <XCircleIcon
-                className="icon close"
-                style={{ color: "var(--rose-500)" }}
-              />
+    <div className="character-detail">
+      <img
+        src={character.image}
+        alt={character.name}
+        className="character-detail__img"
+      />
+      <div className="character-detail__info" style={{ width: "100%" }}>
+        <h3
+          className="name"
+          style={{
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}>
+          <div>
+            <span>{character.gender === "Male" ? "👨🏻‍🦱" : "👩🏻‍🦱"}</span>
+            <span>&nbsp;{character.name}</span>
+          </div>
+          <button onClick={onCloseSelectedCharacter}>
+            <XCircleIcon
+              className="icon close"
+              style={{ color: "var(--rose-500)" }}
+            />
+          </button>
+        </h3>
+        <div className="info">
+          <span
+            className={`status ${
+              character.status === "Dead" ? "red" : ""
+            }`}></span>
+          <span>&nbsp;{character.status}</span>
+          <span> - &nbsp;{character.species}</span>
+        </div>
+        <div className="location">
+          <p>Last known location:</p>
+          <p>{character.location.name}</p>
+        </div>
+        <div className="actions">
+          {isAddToFavorite ? (
+            <p>Already Added To Favorites✅</p>
+          ) : (
+            <button
+              className="btn btn--primary"
+              onClick={() => onAddFavorite(character)}>
+              Add to Favorite
             </button>
-          </h3>
-          <div className="info">
-            <span
-              className={`status ${
-                character.status === "Dead" ? "red" : ""
-              }`}></span>
-            <span>&nbsp;{character.status}</span>
-            <span> - &nbsp;{character.species}</span>
-          </div>
-          <div className="location">
-            <p>Last known location:</p>
-            <p>{character.location.name}</p>
-          </div>
-          <div className="actions">
-            {isAddToFavorite ? (
-              <p>Already Added To Favorites✅</p>
-            ) : (
-              <button
-                className="btn btn--primary"
-                onClick={() => onAddFavorite(character)}>
-                Add to Favorite
-              </button>
-            )}
-          </div>
+          )}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -145,29 +141,27 @@ function EpisodeList({ episodes }) {
   }
 
   return (
-    <>
-      <div className="character-episodes">
-        <div className="title">
-          <h2>List of Episodes:</h2>
-          <button onClick={() => setSortBy((is) => !is)}>
-            <ArrowUpCircleIcon
-              className="icon"
-              style={{ rotate: sortBy ? "0deg" : "180deg" }}
-            />
-          </button>
-        </div>
-        <ul>
-          {sortedEpisodes.map((item, index) => (
-            <li key={item.id}>
-              <div>
-                {String(index + 1).padStart(2, "0")}-{item.episode} : &nbsp;
-                <strong>{item.name}</strong>
-              </div>
-              <div className="badge badge--secondary">{item.air_date}</div>
-            </li>
-          ))}
-        </ul>
+    <div className="character-episodes">
+      <div className="title">
+        <h2>List of Episodes:</h2>
+        <button onClick={() => setSortBy((is) => !is)}>
+          <ArrowUpCircleIcon
+            className="icon"
+            style={{ rotate: sortBy ? "0deg" : "180deg" }}
+          />
+        </button>
       </div>
-    </>
+      <ul>
+        {sortedEpisodes.map((item, index) => (
+          <li key={item.id}>
+            <div>
+              {String(index + 1).padStart(2, "0")}-{item.episode} : &nbsp;
+              <strong>{item.name}</strong>
+            </div>
+            <div className="badge badge--secondary">{item.air_date}</div>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

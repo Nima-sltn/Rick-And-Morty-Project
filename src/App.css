@@ -40,7 +40,6 @@
   position: absolute;
   top: 0;
   right: -6px;
-  display: inline-block;
   background-color: var(--rose-500);
   color: #fff;
   border-radius: 50%;
@@ -212,7 +211,6 @@
 /* character episodes */
 
 .character-episodes {
-  /* border: 1px solid var(--slate-300); */
   background-color: var(--slate-800);
   border-radius: 1rem;
   padding: 1rem;
@@ -243,7 +241,6 @@
   justify-content: space-between;
   color: var(--slate-200);
   padding: 0.5rem 0;
-  /* cursor: pointer; */
 }
 
 @media (min-width: 768px) {
