@@ -1,7 +1,7 @@
 import { ArrowUpCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Loader from "./Loader";
+import Skeleton from "./Skeleton";
 import toast from "react-hot-toast";
 
 function CharacterDetail({
@@ -37,7 +37,7 @@ function CharacterDetail({
     if (selectedId) fetchData();
   }, [selectedId]);
 
-  if (isLoading) return <Loader />;
+  if (isLoading) return <Skeleton type="detail" />;
 
   if (!selectedId || !character)
     return (

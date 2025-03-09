@@ -1,5 +1,5 @@
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
-import Loader from "./Loader";
+import Skeleton from "./Skeleton";
 
 function CharacterList({
   characters,
@@ -10,7 +10,7 @@ function CharacterList({
   if (isLoading)
     return (
       <div className="characters-list">
-        <Loader />
+        <Skeleton type="list" />
       </div>
     );
   return (
