@@ -13,12 +13,30 @@
   --rose-600: #e11d48;
   --rose-500: #f43f5e;
   --green-600: #22c55e;
+  --background-color: var(--slate-900);
+  --text-color: var(--slate-100);
+}
+
+[data-theme="light"] {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --slate-900: #f8fafc;
+  --slate-800: #e2e8f0;
+  --slate-700: #cbd5e1;
+  --slate-600: #94a3b8;
+  --slate-500: #475569;
+  --slate-400: #334155;
+  --slate-300: #1e293b;
+  --slate-200: #0f172a;
+  --slate-100: #000000;
+  --slate-50: #000000;
 }
 
 body {
   width: 100%;
   min-height: 100vh;
-  background-color: var(--slate-900);
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 button {
@@ -44,6 +62,11 @@ button {
   font-size: 1.1rem;
 }
 
+[data-theme="light"] .text-field {
+  color: var(--slate-100);
+  background-color: var(--slate-600);
+}
+
 .text-field::placeholder {
   color: var(--slate-400);
 }
@@ -63,6 +86,11 @@ button {
   background-color: var(--slate-500);
   color: var(--slate-100);
   font-weight: 700;
+}
+
+[data-theme="light"] .btn--primary {
+  color: var(--slate-50);
+  background-color: var(--slate-600);
 }
 
 .btn--secondary {
@@ -132,4 +160,32 @@ button {
   inset: 0;
   background-color: rgba(63, 69, 76, 0.8);
   z-index: 40;
+}
+
+.theme-toggle {
+  background-color: var(--slate-500);
+  border-radius: 50%;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .theme-toggle {
+  background-color: var(--slate-600);
+}
+
+.theme-toggle .icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.theme-toggle .icon.sun {
+  color: var(--yellow-500);
+}
+
+.theme-toggle .icon.moon {
+  color: var(--blue-500);
 }

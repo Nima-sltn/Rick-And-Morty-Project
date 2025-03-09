@@ -1,12 +1,19 @@
-import { HeartIcon, TrashIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { HeartIcon, TrashIcon, SunIcon, MoonIcon } from "@heroicons/react/24/outline";
+import { useState, useContext } from "react";
 import Modal from "./Modal";
 import { Character } from "./characterList";
+import { ThemeContext } from "../context/ThemeContext";
+
 function Navbar({ children }) {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
   return (
     <nav className="navbar">
       <Logo />
       {children}
+      <button className="theme-toggle" onClick={toggleTheme}>
+        {theme === "dark" ? <SunIcon className="icon sun" /> : <MoonIcon className="icon moon" />}
+      </button>
     </nav>
   );
 }
