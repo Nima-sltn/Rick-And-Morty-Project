@@ -189,3 +189,27 @@ button {
 .theme-toggle .icon.moon {
   color: var(--blue-500);
 }
+
+/* Add styles for SelectCharacterPrompt */
+.select-character-prompt {
+  text-align: center;
+  padding: 2rem;
+  background-color: var(--slate-800);
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.select-character-text {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.select-character-card {
+  padding: 1rem;
+  background-color: var(--slate-700);
+  border-radius: 0.5rem;
+}
+
+.select-character-info {
+  color: var(--slate-400);
+}

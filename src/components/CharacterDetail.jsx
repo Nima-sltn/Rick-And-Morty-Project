@@ -40,13 +40,7 @@ function CharacterDetail({
   if (isLoading) return <Skeleton type="detail" />;
 
   if (!selectedId || !character)
-    return (
-      <div
-        className="character-detail__container"
-        style={{ flex: 1, color: "var(--slate-300)" }}>
-        Please select a character.
-      </div>
-    );
+    return <SelectCharacterPrompt />;
 
   return (
     <div style={{ flex: 1 }}>
@@ -63,13 +57,25 @@ function CharacterDetail({
 
 export default CharacterDetail;
 
+function SelectCharacterPrompt() {
+  return (
+    <div className="character-detail__container" style={{ flex: 1, color: "var(--slate-300)" }}>
+      <div className="select-character-prompt">
+        <p className="select-character-text">Please select a character.</p>
+        <div className="select-character-card">
+          <p className="select-character-info">Explore the list and click on a character to see more details.</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function CharacterSubInfo({
   character,
   onAddFavorite,
   isAddToFavorite,
   onCloseSelectedCharacter,
 }) {
-  console.log(character);
   return (
     <div className="character-detail">
       <img
