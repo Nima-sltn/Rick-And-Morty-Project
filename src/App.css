@@ -350,3 +350,15 @@
   color: var(--slate-100);
   font-weight: bold;
 }
+
+@media (max-width: 768px) {
+  .pagination {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .pagination button {
+    padding: 0.25rem 0.5rem;
+    min-width: 35px;
+  }
+}
