@@ -12,10 +12,9 @@ function Modal({ title, children, onOpen, open }) {
             onOpen(false);
           }
         }}
-        role="button"
         tabIndex={0}
-        aria-label="Close backdrop"></div>
-
+        aria-hidden="true"
+      ></div>
       <div className="modal">
         <div className="modal__header">
           <h2 className="title">{title}</h2>
