@@ -10,6 +10,8 @@ const Skeleton = ({ type }) => {
           <div className="skeleton-item"></div>
           <div className="skeleton-item"></div>
           <div className="skeleton-item"></div>
+          <div className="skeleton-item"></div>
+          <div className="skeleton-item"></div>
         </>
       )}
       {type === "detail" && (
