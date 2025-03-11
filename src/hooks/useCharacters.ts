@@ -32,9 +32,9 @@ export default function useCharacters(query: string, page: number) {
           `https://rickandmortyapi.com/api/character?name=${query}&page=${page}`,
           { signal }
         );
-        // Limit the results to the first 5 characters
+
         setCharacters(data.results.slice(0, 5));
-        // Set total pages (using Math.ceil in case pages is a float)
+
         setTotalPages(Math.ceil(data.info.pages));
       } catch (error: unknown) {
         if (!axios.isCancel(error)) {

@@ -11,7 +11,7 @@ const Skeleton: FC<SkeletonProps> = ({ type }) => {
  
 
   return (
-    <output className={containerClass} role="status" aria-live="polite">
+    <output className={containerClass} aria-live="polite">
       {type === "list" ? (
         <>
           {skeletonItems.map((item) => (

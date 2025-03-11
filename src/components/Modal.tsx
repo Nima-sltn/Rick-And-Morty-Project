@@ -27,7 +27,6 @@ const Modal: FC<ModalProps> = ({ title, children, open, onClose }) => {
       ></div>
       <dialog
         className="modal"
-        role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
       >
