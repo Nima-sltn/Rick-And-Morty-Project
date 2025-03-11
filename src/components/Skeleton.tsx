@@ -6,13 +6,16 @@ interface SkeletonProps {
 
 const Skeleton: FC<SkeletonProps> = ({ type }) => {
   const containerClass = `skeleton ${type}`;
+  const skeletonItems = [{ id: "1" }, { id: "2" }, { id: "3" }, { id: "4" }, { id: "5" }];
+
+ 
 
   return (
-    <div className={containerClass} role="status" aria-live="polite">
+    <output className={containerClass} role="status" aria-live="polite">
       {type === "list" ? (
         <>
-          {Array.from({ length: 5 }).map((_, index) => (
-            <div key={index} className="skeleton-item" />
+          {skeletonItems.map((item) => (
+             <div key={item.id} className="skeleton-item" />
           ))}
         </>
       ) : (
@@ -21,7 +24,8 @@ const Skeleton: FC<SkeletonProps> = ({ type }) => {
           <div className="skeleton-info" />
         </>
       )}
-    </div>
+      {crypto.randomUUID()}
+    </output>
   );
 };
 

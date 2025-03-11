@@ -24,9 +24,8 @@ const Modal: FC<ModalProps> = ({ title, children, open, onClose }) => {
         onClick={onClose}
         onKeyDown={handleBackdropKeyDown}
         tabIndex={0}
-        aria-hidden="true"
       ></div>
-      <div
+      <dialog
         className="modal"
         role="dialog"
         aria-modal="true"
@@ -41,7 +40,7 @@ const Modal: FC<ModalProps> = ({ title, children, open, onClose }) => {
           </button>
         </div>
         <div className="modal__content">{children}</div>
-      </div>
+      </dialog>
     </div>
   );
 };
