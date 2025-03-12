@@ -24,7 +24,6 @@ const Skeleton: FC<SkeletonProps> = ({ type }) => {
           <div className="skeleton-info" />
         </>
       )}
-      {crypto.randomUUID()}
     </output>
   );
 };

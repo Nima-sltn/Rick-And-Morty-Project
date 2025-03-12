@@ -1,4 +1,32 @@
-export const character = {
+export interface Location {
+  name: string;
+  url: string;
+}
+
+export interface Character {
+  id: number;
+  name: string;
+  status: "Alive" | "Dead" | "unknown";
+  species: string;
+  type: string;
+  gender: "Male" | "Female" | "unknown";
+  origin: Location;
+  location: Location;
+  image: string;
+  created: string;
+}
+
+export interface Episode {
+  id: number;
+  name: string;
+  air_date: string;
+  episode: string;
+  characters?: Character[]; // Optional since some entries lack it
+  url: string;
+  created: string;
+}
+
+export const character: Character = {
   id: 1,
   name: "Rick Sanchez",
   status: "Dead",
@@ -16,7 +44,8 @@ export const character = {
   image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
   created: "2017-11-04T18:48:46.250Z",
 };
-export const allCharacters = [
+
+export const allCharacters: Character[] = [
   {
     id: 1,
     name: "Rick Sanchez",
@@ -55,7 +84,7 @@ export const allCharacters = [
   },
 ];
 
-export const episodes = [
+export const episodes: Episode[] = [
   {
     id: 1,
     name: "Pilot",

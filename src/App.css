@@ -331,18 +331,14 @@
   padding: 0.5rem 1rem;
   min-width: 47px;
   border-radius: 0.5rem;
-  background-color: var(--slate-500);
+  background-color: var(--slate-600);
   color: var(--slate-100);
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.pagination button:disabled {
-  background-color: var(--slate-700);
-}
-
 .pagination button.active {
-  background-color: var(--slate-300);
+  background-color: var(--slate-500);
   color: var(--slate-900);
 }
 
