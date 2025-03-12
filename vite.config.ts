@@ -10,5 +10,9 @@ export default defineConfig({
     environment: 'jsdom', 
     setupFiles: './src/setupTests.ts', 
     exclude: [...configDefaults.exclude, 'e2e/**'], // Exclude end-to-end tests if using Playwright or Cypress
+    coverage: {
+      provider: 'v8', // or 'istanbul'
+      reporter: ['text', 'html'],
+    },
   },
 });
