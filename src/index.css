@@ -125,6 +125,11 @@ button {
   z-index: 50;
 }
 
+.empty-modal{
+color:var(--slate-100);
+text-align:center;
+}
+
 .modal__header {
   display: flex;
   align-items: center;

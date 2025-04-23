@@ -64,11 +64,7 @@ export const Favorites: FC<FavoritesProps> = ({ favorite, onDeleteFavorite }) =>
       <Modal open={isOpen} onClose={() => setIsOpen(false)} title="List of Favorites">
         {favorite.length === 0 ? (
           <p
-            style={{
-              width: "100%",
-              textAlign: "center",
-              color: "white",
-            }}
+           className="empty-modal"
           >
             Favorites List is Empty 😪
           </p>

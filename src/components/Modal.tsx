@@ -28,7 +28,7 @@ const Modal: FC<ModalProps> = ({ title, children, open, onClose }) => {
       <dialog
         className="modal"
         aria-modal="true"
-        aria-labelledby="modal-title"
+        aria-labelledby="modal-title" open
       >
         <div className="modal__header">
           <h2 id="modal-title" className="title">
