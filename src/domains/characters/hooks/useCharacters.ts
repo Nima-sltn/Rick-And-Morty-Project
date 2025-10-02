@@ -63,7 +63,11 @@ export function useCharacter(id: number | null) {
  */
 export function useCharactersByIds(ids: number[]) {
   return useQuery({
-    queryKey: [...characterKeys.all, "multiple", ids.sort()],
+    queryKey: [
+      ...characterKeys.all,
+      "multiple",
+      [...ids].sort((a, b) => a - b),
+    ],
     queryFn: () => characterService.getCharactersByIds(ids),
     enabled: ids.length > 0,
     staleTime: 10 * 60 * 1000,

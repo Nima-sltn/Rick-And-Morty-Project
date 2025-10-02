@@ -11,9 +11,16 @@ export const episodeKeys = {
   search: (query: string) => [...episodeKeys.all, "search", query] as const,
   season: (season: number) => [...episodeKeys.all, "season", season] as const,
   seasons: () => [...episodeKeys.all, "seasons"] as const,
+
   byUrls: (urls: string[]) =>
-    [...episodeKeys.all, "byUrls", urls.sort()] as const,
-  byIds: (ids: number[]) => [...episodeKeys.all, "byIds", ids.sort()] as const,
+    [
+      ...episodeKeys.all,
+      "byUrls",
+      [...urls].sort((a, b) => a.localeCompare(b)),
+    ] as const,
+
+  byIds: (ids: number[]) =>
+    [...episodeKeys.all, "byIds", [...ids].sort((a, b) => a - b)] as const,
 };
 
 /**
