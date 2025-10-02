@@ -58,6 +58,7 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({
         ${className}
       `}
       onClick={handleSelect}>
+      {/* Image Container */}
       <div className="relative overflow-hidden">
         <img
           src={character.image}
@@ -66,6 +67,7 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({
           loading="lazy"
         />
 
+        {/* Status Indicator */}
         <div className="absolute top-3 left-3 flex items-center space-x-2">
           <div
             className={`w-3 h-3 rounded-full ${statusColors[character.status]}`}
@@ -75,6 +77,7 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({
           </span>
         </div>
 
+        {/* Favorite Button */}
         {onToggleFavorite && (
           <motion.button
             whileHover={{ scale: 1.1 }}
@@ -89,6 +92,7 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({
           </motion.button>
         )}
 
+        {/* Select Button */}
         {onSelect && (
           <motion.button
             whileHover={{ scale: 1.1 }}
@@ -104,7 +108,9 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({
         )}
       </div>
 
+      {/* Content */}
       <div className="p-4">
+        {/* Name and Gender */}
         <div className="flex items-center justify-between mb-2">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white truncate">
             {character.name}
@@ -114,6 +120,7 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({
           </span>
         </div>
 
+        {/* Species */}
         <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
           {character.species}
           {character.type && (
@@ -123,6 +130,7 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({
           )}
         </p>
 
+        {/* Location */}
         <div className="mb-3">
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">
             Last known location:
@@ -132,6 +140,7 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({
           </p>
         </div>
 
+        {/* Episodes Count */}
         <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
           <span>{character.episode.length} episodes</span>
           <span title={`Created: ${formatDate(character.created)}`}>
@@ -140,6 +149,7 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({
         </div>
       </div>
 
+      {/* Hover Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
     </motion.div>
   );

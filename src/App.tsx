@@ -26,6 +26,7 @@ const App: React.FC = () => {
     "rick-morty-favorites",
     []
   );
+
   const {
     data: charactersResponse,
     isLoading,

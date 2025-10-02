@@ -106,6 +106,7 @@ export const CharacterList: React.FC<CharacterListProps> = ({
   );
 };
 
+// Wrapper component with Suspense
 export const CharacterListWithSuspense: React.FC<CharacterListProps> = (
   props
 ) => (
