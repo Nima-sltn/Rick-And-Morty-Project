@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, FC } from "react";
+import { useEffect, useState, useMemo, FC } from "react";
 import { ArrowUpCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
 import Skeleton from "./Skeleton";
@@ -46,18 +46,20 @@ export const CharacterDetail: FC<CharacterDetailProps> = ({
       setIsLoading(true);
       try {
         const { data: characterData } = await axios.get<Character>(
-          `https://rickandmortyapi.com/api/character/${selectedId}`
+          `https://rickandmortyapi.com/api/character/${selectedId}`,
         );
         setCharacter(characterData);
 
         const episodesId = characterData.episode.map((url) =>
-          url.split("/").pop()
+          url.split("/").pop(),
         );
         const { data: episodeData } = await axios.get<Episode[]>(
-          `https://rickandmortyapi.com/api/episode/${episodesId}`
+          `https://rickandmortyapi.com/api/episode/${episodesId}`,
         );
         // Normalize the episodeData to an array and take the first five episodes.
-        setEpisodes(Array.isArray(episodeData) ? episodeData.slice(0, 5) : [episodeData]);
+        setEpisodes(
+          Array.isArray(episodeData) ? episodeData.slice(0, 5) : [episodeData],
+        );
       } catch (err: unknown) {
         if (axios.isAxiosError(err) && err.response) {
           toast.error(err.response.data.error);
@@ -90,8 +92,7 @@ export const CharacterDetail: FC<CharacterDetailProps> = ({
 const SelectCharacterPrompt: FC = () => (
   <div
     className="character-detail__container"
-    style={{ flex: 1, color: "var(--slate-300)" }}
-  >
+    style={{ flex: 1, color: "var(--slate-300)" }}>
     <div className="select-character-prompt">
       <p className="select-character-text">Please select a character.</p>
       <div className="select-character-card">
@@ -131,8 +132,7 @@ const CharacterSubInfo: FC<CharacterSubInfoProps> = ({
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-          }}
-        >
+          }}>
           <div>
             <span>{character.gender === "Male" ? "👨🏻‍🦱" : "👩🏻‍🦱"}</span>
             <span>&nbsp;{character.name}</span>
@@ -146,8 +146,7 @@ const CharacterSubInfo: FC<CharacterSubInfoProps> = ({
         </h3>
         <div className="info">
           <span
-            className={`status ${character.status === "Dead" ? "red" : ""}`}
-          ></span>
+            className={`status ${character.status === "Dead" ? "red" : ""}`}></span>
           <span>&nbsp;{character.status}</span>
           <span> - &nbsp;{character.species}</span>
         </div>
@@ -161,8 +160,7 @@ const CharacterSubInfo: FC<CharacterSubInfoProps> = ({
           ) : (
             <button
               className="btn btn--primary"
-              onClick={() => onAddFavorite(character)}
-            >
+              onClick={() => onAddFavorite(character)}>
               Add to Favorite
             </button>
           )}
@@ -183,7 +181,7 @@ const EpisodeList: FC<EpisodeListProps> = ({ episodes }) => {
     return [...episodes].sort((a, b) =>
       sortByAsc
         ? new Date(a.created).getTime() - new Date(b.created).getTime()
-        : new Date(b.created).getTime() - new Date(a.created).getTime()
+        : new Date(b.created).getTime() - new Date(a.created).getTime(),
     );
   }, [episodes, sortByAsc]);
 
@@ -214,4 +212,3 @@ const EpisodeList: FC<EpisodeListProps> = ({ episodes }) => {
 };
 
 export default CharacterDetail;
-

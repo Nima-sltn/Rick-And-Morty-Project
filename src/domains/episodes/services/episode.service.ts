@@ -1,4 +1,5 @@
 import { apiService } from "../../../shared/services/api.service";
+
 import {
   Episode,
   ApiResponse,
@@ -8,11 +9,8 @@ import {
 export class EpisodeService {
   private readonly endpoint = "/episode";
 
-  /**
-   * Get paginated list of episodes with optional filters
-   */
   async getEpisodes(
-    filters: EpisodeFilters = {}
+    filters: EpisodeFilters = {},
   ): Promise<ApiResponse<Episode>> {
     const params = new URLSearchParams();
 
@@ -21,81 +19,63 @@ export class EpisodeService {
     if (filters.page) params.append("page", filters.page.toString());
 
     return apiService.get<ApiResponse<Episode>>(
-      `${this.endpoint}?${params.toString()}`
+      `${this.endpoint}?${params.toString()}`,
     );
   }
 
-  /**
-   * Get a single episode by ID
-   */
   async getEpisode(id: number): Promise<Episode> {
     return apiService.get<Episode>(`${this.endpoint}/${id}`);
   }
 
-  /**
-   * Get multiple episodes by IDs
-   */
   async getEpisodesByIds(ids: number[]): Promise<Episode[]> {
     if (ids.length === 0) return [];
 
     const idsString = ids.join(",");
     const result = await apiService.get<Episode | Episode[]>(
-      `${this.endpoint}/${idsString}`
+      `${this.endpoint}/${idsString}`,
     );
 
     return Array.isArray(result) ? result : [result];
   }
 
-  /**
-   * Extract episode IDs from URLs
-   */
   extractEpisodeIds(urls: string[]): number[] {
+    const regex = /\/episode\/(\d+)$/;
+
     return urls
       .map((url) => {
-        const match = url.match(/\/episode\/(\d+)$/);
+        const match = regex.exec(url);
         return match ? parseInt(match[1], 10) : null;
       })
       .filter((id): id is number => id !== null);
   }
 
-  /**
-   * Get episodes by URLs (common pattern in Rick and Morty API)
-   */
   async getEpisodesByUrls(urls: string[]): Promise<Episode[]> {
     const ids = this.extractEpisodeIds(urls);
     return this.getEpisodesByIds(ids);
   }
 
-  /**
-   * Search episodes
-   */
   async searchEpisodes(
     query: string,
-    page: number = 1
+    page: number = 1,
   ): Promise<ApiResponse<Episode>> {
     return this.getEpisodes({ name: query, page });
   }
 
-  /**
-   * Get episodes by season
-   */
   async getEpisodesBySeason(season: number): Promise<Episode[]> {
     const seasonCode = `S${season.toString().padStart(2, "0")}`;
     const response = await this.getEpisodes({ episode: seasonCode });
+
     return response.results;
   }
 
-  /**
-   * Get all seasons with episode counts
-   */
   async getSeasonsSummary(): Promise<
     { season: number; episodeCount: number; episodes: Episode[] }[]
   > {
     try {
       const firstPage = await this.getEpisodes({ page: 1 });
       const totalPages = firstPage.info.pages;
-
       const allEpisodes: Episode[] = [];
+
       for (let page = 1; page <= totalPages; page++) {
         const pageData = await this.getEpisodes({ page });
         allEpisodes.push(...pageData.results);
@@ -104,12 +84,16 @@ export class EpisodeService {
       const seasonMap = new Map<number, Episode[]>();
 
       allEpisodes.forEach((episode) => {
-        const seasonMatch = episode.episode.match(/S(\d+)E\d+/);
+        const seasonRegex = /S(\d+)E\d+/;
+        const seasonMatch = seasonRegex.exec(episode.episode);
+
         if (seasonMatch) {
           const season = parseInt(seasonMatch[1], 10);
+
           if (!seasonMap.has(season)) {
             seasonMap.set(season, []);
           }
+
           seasonMap.get(season)!.push(episode);
         }
       });
@@ -129,4 +113,5 @@ export class EpisodeService {
 }
 
 export const episodeService = new EpisodeService();
+
 export default EpisodeService;

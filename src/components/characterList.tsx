@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react";
+import { FC, ReactNode } from "react";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import Skeleton from "./Skeleton";
 
@@ -39,8 +39,7 @@ const CharacterList: FC<CharacterListProps> = ({
           <button
             className="icon red"
             onClick={() => onSelectCharacter(character.id)}
-            aria-label="Select Character"
-          >
+            aria-label="Select Character">
             {selectedId === character.id ? <EyeSlashIcon /> : <EyeIcon />}
           </button>
         </Character>

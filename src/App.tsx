@@ -1,8 +1,7 @@
 import React, { useState, Suspense } from "react";
 import { Toaster } from "react-hot-toast";
 import { ErrorBoundary } from "./shared/components/ErrorBoundary";
-import { Layout, Container, Main, Sidebar } from "./shared/components/Layout";
-import { SearchBar } from "./shared/components/SearchBar";
+import { Layout, Container } from "./shared/components/Layout";
 import { LoadingSpinner } from "./shared/components/LoadingSpinner";
 import { CharacterList } from "./domains/characters/components/CharacterList";
 import { CharacterDetail } from "./domains/characters/components/CharacterDetail";
@@ -11,27 +10,22 @@ import { useLocalStorage } from "./shared/hooks/useLocalStorage";
 import { Character } from "./shared/types/api.types";
 import { Navbar } from "./components/Navbar";
 import { motion, AnimatePresence } from "framer-motion";
-
 import "./index.css";
 
 const App: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCharacterId, setSelectedCharacterId] = useState<number | null>(
-    null
+    null,
   );
   const [showDetail, setShowDetail] = useState(false);
 
   const [favorites, setFavorites] = useLocalStorage<Character[]>(
     "rick-morty-favorites",
-    []
+    [],
   );
 
-  const {
-    data: charactersResponse,
-    isLoading,
-    error,
-  } = useCharacters({
+  const { data: charactersResponse, isLoading } = useCharacters({
     name: searchQuery || undefined,
     page: currentPage,
   });
