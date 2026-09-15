@@ -31,6 +31,7 @@ export class EpisodeService {
     if (ids.length === 0) return [];
 
     const idsString = ids.join(",");
+
     const result = await apiService.get<Episode | Episode[]>(
       `${this.endpoint}/${idsString}`,
     );
@@ -51,6 +52,7 @@ export class EpisodeService {
 
   async getEpisodesByUrls(urls: string[]): Promise<Episode[]> {
     const ids = this.extractEpisodeIds(urls);
+
     return this.getEpisodesByIds(ids);
   }
 
@@ -63,6 +65,7 @@ export class EpisodeService {
 
   async getEpisodesBySeason(season: number): Promise<Episode[]> {
     const seasonCode = `S${season.toString().padStart(2, "0")}`;
+
     const response = await this.getEpisodes({ episode: seasonCode });
 
     return response.results;
@@ -74,10 +77,12 @@ export class EpisodeService {
     try {
       const firstPage = await this.getEpisodes({ page: 1 });
       const totalPages = firstPage.info.pages;
+
       const allEpisodes: Episode[] = [];
 
       for (let page = 1; page <= totalPages; page++) {
         const pageData = await this.getEpisodes({ page });
+
         allEpisodes.push(...pageData.results);
       }
 
@@ -102,11 +107,14 @@ export class EpisodeService {
         .map(([season, episodes]) => ({
           season,
           episodeCount: episodes.length,
-          episodes: episodes.sort((a, b) => a.episode.localeCompare(b.episode)),
+          episodes: episodes.toSorted((a, b) =>
+            a.episode.localeCompare(b.episode),
+          ),
         }))
-        .sort((a, b) => a.season - b.season);
+        .toSorted((a, b) => a.season - b.season);
     } catch (error) {
       console.error("Error fetching seasons summary:", error);
+
       return [];
     }
   }

@@ -62,10 +62,10 @@ export const truncateText = (text: string, maxLength: number): string => {
  * Format episode code (e.g., "S01E01")
  */
 export const formatEpisodeCode = (episode: string): string => {
-  const match = episode.match(/S(\d+)E(\d+)/);
+  const match = /S(\d+)E(\d+)/.exec(episode);
   if (match) {
     const [, season, ep] = match;
-    return `Season ${parseInt(season)}, Episode ${parseInt(ep)}`;
+    return `Season ${parseInt(season, 10)}, Episode ${parseInt(ep, 10)}`;
   }
   return episode;
 };

@@ -1,4 +1,12 @@
-import React, { createContext, useContext, ReactNode } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  ReactNode,
+} from "react";
+
 import { Theme, ThemeContextType } from "../types/ui.types";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
@@ -15,15 +23,16 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
 }) => {
   const [theme, setTheme] = useLocalStorage<Theme>(
     "rick-morty-theme",
-    defaultTheme
+    defaultTheme,
   );
 
-  const toggleTheme = () => {
+  const toggleTheme = useCallback(() => {
     setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
-  };
+  }, [setTheme]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const root = document.documentElement;
+
     root.setAttribute("data-theme", theme);
 
     if (theme === "dark") {
@@ -33,10 +42,13 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     }
   }, [theme]);
 
-  const value: ThemeContextType = {
-    theme,
-    toggleTheme,
-  };
+  const value = useMemo<ThemeContextType>(
+    () => ({
+      theme,
+      toggleTheme,
+    }),
+    [theme, toggleTheme],
+  );
 
   return (
     <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
@@ -45,9 +57,11 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
 
 export const useTheme = (): ThemeContextType => {
   const context = useContext(ThemeContext);
+
   if (context === undefined) {
     throw new Error("useTheme must be used within a ThemeProvider");
   }
+
   return context;
 };
 

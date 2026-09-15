@@ -70,6 +70,7 @@ export const CardSkeleton: React.FC<{ className?: string }> = ({
     className={`p-4 border border-gray-200 dark:border-gray-700 rounded-lg ${className}`}>
     <div className="flex items-center space-x-4">
       <Skeleton variant="circular" width={60} height={60} />
+
       <div className="flex-1 space-y-2">
         <Skeleton variant="text" width="75%" height={20} />
         <Skeleton variant="text" width="50%" height={16} />
@@ -79,13 +80,13 @@ export const CardSkeleton: React.FC<{ className?: string }> = ({
   </div>
 );
 
-export const ListSkeleton: React.FC<{ count?: number; className?: string }> = ({
-  count = 5,
-  className = "",
-}) => (
+export const ListSkeleton: React.FC<{
+  count?: number;
+  className?: string;
+}> = ({ count = 5, className = "" }) => (
   <div className={`space-y-3 ${className}`}>
-    {Array.from({ length: count }).map((_, index) => (
-      <CardSkeleton key={index} />
+    {Array.from({ length: count }, (_, index) => (
+      <CardSkeleton key={`list-skeleton-${index}`} />
     ))}
   </div>
 );
@@ -101,15 +102,18 @@ export const DetailSkeleton: React.FC<{ className?: string }> = ({
         height={300}
         className="mx-auto md:mx-0"
       />
+
       <div className="flex-1 space-y-4">
         <Skeleton variant="text" width="80%" height={32} />
         <Skeleton variant="text" width="60%" height={20} />
         <Skeleton variant="text" width="70%" height={20} />
+
         <div className="space-y-2 mt-6">
           <Skeleton variant="text" width="100%" height={16} />
           <Skeleton variant="text" width="90%" height={16} />
           <Skeleton variant="text" width="95%" height={16} />
         </div>
+
         <div className="flex gap-2 mt-6">
           <Skeleton variant="rectangular" width={120} height={40} />
           <Skeleton variant="rectangular" width={100} height={40} />
@@ -126,9 +130,9 @@ export const GridSkeleton: React.FC<{
 }> = ({ count = 12, columns = 4, className = "" }) => (
   <div
     className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ${className}`}>
-    {Array.from({ length: count }).map((_, index) => (
+    {Array.from({ length: count }, (_, index) => (
       <div
-        key={index}
+        key={`grid-skeleton-${index}`}
         className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
         <Skeleton
           variant="rectangular"
@@ -136,6 +140,7 @@ export const GridSkeleton: React.FC<{
           height={200}
           className="mb-4"
         />
+
         <Skeleton variant="text" width="80%" height={20} className="mb-2" />
         <Skeleton variant="text" width="60%" height={16} />
       </div>

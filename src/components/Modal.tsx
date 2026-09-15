@@ -1,4 +1,5 @@
-import React, { FC, ReactNode } from "react";
+import { FC, ReactNode } from "react";
+
 import { XCircleIcon } from "@heroicons/react/24/outline";
 
 interface ModalProps {
@@ -11,19 +12,10 @@ interface ModalProps {
 const Modal: FC<ModalProps> = ({ title, children, open, onClose }) => {
   if (!open) return null;
 
-  const handleBackdropKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "Enter" || e.key === " ") {
-      onClose();
-    }
-  };
-
   return (
     <div className="modal-wrapper">
-      <div
-        className="backdrop"
-        onClick={onClose}
-        onKeyDown={handleBackdropKeyDown}
-        role="presentation"></div>
+      <div className="backdrop" onClick={onClose} aria-hidden="true" />
+
       <dialog
         className="modal"
         aria-modal="true"
@@ -33,10 +25,12 @@ const Modal: FC<ModalProps> = ({ title, children, open, onClose }) => {
           <h2 id="modal-title" className="title">
             {title}
           </h2>
+
           <button onClick={onClose} type="button" aria-label="Close modal">
             <XCircleIcon className="icon close" />
           </button>
         </div>
+
         <div className="modal__content">{children}</div>
       </dialog>
     </div>
