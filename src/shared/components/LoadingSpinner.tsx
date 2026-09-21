@@ -5,6 +5,8 @@ interface LoadingSpinnerProps {
   size?: "sm" | "md" | "lg" | "xl";
   color?: "primary" | "secondary" | "white";
   className?: string;
+  /** Accessible label for screen readers */
+  ariaLabel?: string;
 }
 
 const sizeClasses = {
@@ -24,9 +26,12 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   size = "md",
   color = "primary",
   className = "",
+  ariaLabel = "Loading",
 }) => {
   return (
     <motion.div
+      role="status"
+      aria-label={ariaLabel}
       className={`inline-block ${sizeClasses[size]} ${colorClasses[color]} ${className}`}
       animate={{ rotate: 360 }}
       transition={{ duration: 1, repeat: Infinity, ease: "linear" }}>

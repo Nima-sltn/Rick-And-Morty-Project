@@ -56,6 +56,16 @@ export const Sidebar: React.FC<LayoutProps & { isOpen?: boolean }> = ({
   );
 };
 
+const columnClasses: Record<number, string> = {
+  1: "lg:grid-cols-1 xl:grid-cols-1",
+  2: "lg:grid-cols-2 xl:grid-cols-2",
+  3: "lg:grid-cols-3 xl:grid-cols-3",
+  4: "lg:grid-cols-4 xl:grid-cols-4",
+  6: "lg:grid-cols-4 xl:grid-cols-6",
+  8: "lg:grid-cols-4 xl:grid-cols-8",
+  12: "lg:grid-cols-4 xl:grid-cols-12",
+};
+
 export const Grid: React.FC<
   LayoutProps & {
     columns?: number;
@@ -68,13 +78,14 @@ export const Grid: React.FC<
     lg: "gap-6",
   };
 
+  const resolvedColumns = columnClasses[columns] || columnClasses[4];
+
   return (
     <div
       className={`
       grid grid-cols-1 
       sm:grid-cols-2 
-      lg:grid-cols-${Math.min(columns, 4)} 
-      xl:grid-cols-${columns} 
+      ${resolvedColumns} 
       ${gapClasses[gap]} 
       ${className}
     `}>

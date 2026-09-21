@@ -95,6 +95,7 @@ export const CharacterDetail: React.FC<CharacterDetailProps> = ({
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: 300 }}
         transition={{ duration: 0.3 }}
+        data-testid="character-detail"
         className={`bg-white dark:bg-gray-800 rounded-xl shadow-xl overflow-hidden h-full flex flex-col ${className}`}>
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-br from-primary-600 to-primary-800" />
@@ -125,6 +126,7 @@ export const CharacterDetail: React.FC<CharacterDetailProps> = ({
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={handleToggleFavorite}
+                    aria-label={isFavorite ? `Remove ${character.name} from favorites` : `Add ${character.name} to favorites`}
                     className="p-2 bg-white/20 hover:bg-white/30 rounded-full transition-colors">
                     {isFavorite ? (
                       <HeartSolidIcon className="h-6 w-6 text-red-400" />
@@ -138,6 +140,7 @@ export const CharacterDetail: React.FC<CharacterDetailProps> = ({
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={onClose}
+                  aria-label="Close character detail"
                   className="p-2 bg-white/20 hover:bg-white/30 rounded-full transition-colors">
                   <XMarkIcon className="h-6 w-6 text-white" />
                 </motion.button>

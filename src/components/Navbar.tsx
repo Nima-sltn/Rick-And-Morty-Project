@@ -66,6 +66,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setShowFavorites(true)}
+                aria-label="Show favorites"
                 className="relative p-2 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
                 {favorites.length > 0 ? (
                   <HeartSolidIcon className="h-6 w-6 text-red-500" />
@@ -83,6 +84,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={toggleTheme}
+                aria-label="Toggle theme"
                 className="p-2 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
                 {theme === "dark" ? (
                   <SunIcon className="h-6 w-6" />
@@ -97,6 +99,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
                 className="p-2 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
                 <motion.div
                   animate={{ rotate: isMobileMenuOpen ? 90 : 0 }}
@@ -149,6 +152,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                           setShowFavorites(true);
                           setIsMobileMenuOpen(false);
                         }}
+                        aria-label="Show favorites"
                         className="relative p-2 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
                         {favorites.length > 0 ? (
                           <HeartSolidIcon className="h-6 w-6 text-red-500" />
@@ -169,6 +173,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                           toggleTheme();
                           setIsMobileMenuOpen(false);
                         }}
+                        aria-label="Toggle theme"
                         className="p-2 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
                         {theme === "dark" ? (
                           <SunIcon className="h-6 w-6" />
@@ -219,6 +224,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </div>
                 <button
                   onClick={() => onRemoveFavorite(character.id)}
+                  aria-label={`Remove ${character.name} from favorites`}
                   className="p-2 text-red-500 hover:text-red-700 transition-colors">
                   <TrashIcon className="h-4 w-4" />
                 </button>

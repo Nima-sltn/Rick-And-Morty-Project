@@ -6,6 +6,10 @@ import {
   EpisodeFilters,
 } from "../../../shared/types/api.types";
 
+/**
+ * Service class for interacting with the Rick and Morty API episode endpoints.
+ * Handles fetching, searching, and filtering episodes by season.
+ */
 export class EpisodeService {
   private readonly endpoint = "/episode";
 
@@ -71,6 +75,10 @@ export class EpisodeService {
     return response.results;
   }
 
+  /**
+   * Fetches all episodes and groups them by season with metadata.
+   * @returns Array of season summaries with episode counts
+   */
   async getSeasonsSummary(): Promise<
     { season: number; episodeCount: number; episodes: Episode[] }[]
   > {

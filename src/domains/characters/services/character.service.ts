@@ -6,6 +6,10 @@ import {
   SearchFilters,
 } from "../../../shared/types/api.types";
 
+/**
+ * Service class for interacting with the Rick and Morty API character endpoints.
+ * Handles fetching, searching, and filtering characters.
+ */
 export class CharacterService {
   private readonly endpoint = "/character";
 
@@ -58,6 +62,11 @@ export class CharacterService {
     return this.getCharacters({ name: query, page });
   }
 
+  /**
+   * Fetches random characters from a random page.
+   * @param count - Number of random characters to return (default: 5)
+   * @returns Array of randomly selected characters
+   */
   async getRandomCharacters(count: number = 5): Promise<Character[]> {
     try {
       const firstPage = await this.getCharacters({ page: 1 });

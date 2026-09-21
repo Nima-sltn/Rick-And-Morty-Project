@@ -51,6 +51,7 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       whileHover={{ y: -4 }}
+      data-testid="character-card"
       className={`
         relative bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl 
         transition-all duration-300 overflow-hidden cursor-pointer group
@@ -83,6 +84,7 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={handleToggleFavorite}
+            aria-label={isFavorite ? `Remove ${character.name} from favorites` : `Add ${character.name} to favorites`}
             className="absolute top-3 right-3 p-2 bg-white/90 dark:bg-gray-800/90 rounded-full shadow-md hover:bg-white dark:hover:bg-gray-700 transition-colors">
             {isFavorite ? (
               <HeartSolidIcon className="h-5 w-5 text-red-500" />
@@ -98,6 +100,7 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={handleSelect}
+            aria-label={isSelected ? `Hide details for ${character.name}` : `Show details for ${character.name}`}
             className="absolute bottom-3 right-3 p-2 bg-primary-600 text-white rounded-full shadow-md hover:bg-primary-700 transition-colors">
             {isSelected ? (
               <EyeSlashIcon className="h-5 w-5" />

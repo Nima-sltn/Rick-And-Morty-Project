@@ -72,6 +72,13 @@ const App: React.FC = () => {
           }}
         />
 
+        {/* Skip-to-content link for keyboard navigation */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary-600 focus:text-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+          Skip to content
+        </a>
+
         <Navbar
           searchQuery={searchQuery}
           onSearchChange={handleSearchChange}
@@ -82,6 +89,7 @@ const App: React.FC = () => {
           resultsCount={characters.length}
         />
 
+        <main id="main-content" tabIndex={-1}>
         <Container className="py-6">
           <div className="flex gap-6 h-[calc(100vh-140px)] relative">
             <div
@@ -176,6 +184,7 @@ const App: React.FC = () => {
             </AnimatePresence>
           </div>
         </Container>
+        </main>
       </Layout>
     </ErrorBoundary>
   );

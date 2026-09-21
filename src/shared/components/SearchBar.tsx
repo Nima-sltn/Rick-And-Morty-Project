@@ -58,11 +58,13 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
         <input
           type="text"
+          data-testid="search-input"
           value={localValue}
           onChange={(e) => setLocalValue(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
           autoFocus={autoFocus}
+          aria-label={placeholder}
           className="
             block w-full pl-10 pr-10 py-3 
             bg-white dark:bg-gray-800 
@@ -81,6 +83,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             onClick={handleClear}
+            aria-label="Clear search"
             className="
               absolute inset-y-0 right-0 pr-3 flex items-center
               text-gray-400 hover:text-gray-600 dark:hover:text-gray-300

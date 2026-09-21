@@ -7,6 +7,13 @@ interface UseOptimisticUpdateOptions<T> {
   rollbackFn?: (oldData: T | undefined) => T | undefined;
 }
 
+/**
+ * Hook for performing optimistic updates with automatic rollback on failure.
+ * @param options.queryKey - React Query cache key to update
+ * @param options.updateFn - Function to compute the optimistic update from old data
+ * @param options.rollbackFn - Optional function to compute rollback state on error
+ * @returns An object with `optimisticUpdate` and `invalidateQuery` methods
+ */
 export function useOptimisticUpdate<T>({
   queryKey,
   updateFn,

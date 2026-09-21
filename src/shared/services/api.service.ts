@@ -65,6 +65,12 @@ class ApiService {
     return error.message || "Request failed";
   }
 
+  /**
+   * Performs a GET request to the specified endpoint.
+   * @param endpoint - The API endpoint path
+   * @param params - Optional query parameters
+   * @returns The response data typed as T
+   */
   async get<T>(endpoint: string, params?: Record<string, unknown>): Promise<T> {
     const response = await this.client.get<T>(endpoint, {
       params,
@@ -91,6 +97,11 @@ class ApiService {
     return response.data;
   }
 
+  /**
+   * Fetches multiple resources in parallel from the given URLs.
+   * @param urls - Array of full or relative API URLs
+   * @returns Array of typed response data
+   */
   async getBatch<T>(urls: string[]): Promise<T[]> {
     const promises = urls.map((url) => this.client.get<T>(url));
 
